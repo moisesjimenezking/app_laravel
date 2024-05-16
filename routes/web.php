@@ -20,3 +20,7 @@ Route::get('/', function () {
 
 Route::post('/register', [UserController::class, 'store'])
     ->name('register');
+
+Route::get('/users', [UserController::class, 'index']);
+
+Route::delete('/users', [UserController::class, 'destroy']);
