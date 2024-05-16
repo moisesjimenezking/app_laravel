@@ -1,12 +1,5 @@
 FROM php:8.1-apache
 
-# # Instalar dependencias necesarias para Composer y extensiones de PHP
-# RUN apt-get update && apt-get install -y \
-#         libzip-dev \
-#         zip \
-#         unzip \
-#     && docker-php-ext-install pdo_mysql zip
-
 RUN apt-get update && apt-get install -y \
         libzip-dev \
         zip \
