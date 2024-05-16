@@ -33,6 +33,5 @@ RUN chown -R www-data:www-data /var/www/html \
 EXPOSE 80
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
