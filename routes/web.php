@@ -14,13 +14,12 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [UserController::class, 'index']);
+Route::get('/users', [UserController::class, 'index']);
 
 Route::post('/register', [UserController::class, 'store'])
     ->name('register');
 
-Route::get('/users', [UserController::class, 'index']);
-
 Route::delete('/users', [UserController::class, 'destroy']);
+
+Route::put('/users', [UserController::class, 'update']);
