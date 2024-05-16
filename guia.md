@@ -11,6 +11,7 @@
 
 ## archivo .env
 1. puede crear sua rchivo .en apartir del archivo .env.example puede estotalmente funcional
+2. de igual forma el archivo build.sh se encarga de crear el archivo
 
 ## iniciar el contenedor
 1. Solo aceda al directorio del repositorio
