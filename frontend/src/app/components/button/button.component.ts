@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-type BColor = 'primary' | 'secondary' | 'tertiary' | 'medium' | 'dark' | 'white' | 'transparent';
+type BColor = 'primary' | 'secondary' | 'tertiary' | 'medium' | 'dark' | 'light' | 'white' | 'transparent';
 
 @Component({
   selector: 'app-button',

@@ -16,6 +16,11 @@ export interface APIResponseModel<T> {
     total: number;
 }
 
+export interface APIQueryEmployee extends Partial<EmployeeModel> {
+    page: number;
+    limit?: number;
+}
+
 export interface APIResponseLinkModel {
     url: null | string;
     label: string;

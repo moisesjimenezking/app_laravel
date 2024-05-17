@@ -16,6 +16,7 @@ import { IconComponent } from "@/components/icon.component";
     <div class="flex w-full">
     <ng-content select="[slot=start]"/>
      <app-input
+     [class]="class"
      [formControl]="control" [placeholder]="placeholder">
         <!-- <app-icon [icon]="icon" class="text-color" color="" size="20px" strokeWidth="2rem" /> -->
 
@@ -51,6 +52,7 @@ import { IconComponent } from "@/components/icon.component";
 export class CustomInputComponent extends BaseCustomComponent implements OnInit, OnDestroy {
     @Input({ required: true, alias: 'controlKey', }) _key!: string;
     @Input({ required: true }) placeholder!: string;
+    @Input() class: string = '';
     @Input() requiredMessage: string = 'Este campo es requerido.';
     @Input() pattern?: RegExp;
     @Input() patternMessage: string = 'El campo es inválido.';

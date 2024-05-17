@@ -8,6 +8,15 @@
             <span>Registrar empleado</span>
         </app-button>
     </div>
+
+
+    <div class="w-full my-6">
+        <app-filters (search)="onSearchEmployee($event)" />
+        <app-pagination [enablePrevPagination]="page > 1" [enableNextPagination]="
+            employees.length > 
+            limit" />
+    </div>
+
     <div class="relative overflow-x-auto sm:rounded-lg my-3">
         <table class="w-full text-sm text-left rtl:text-right table-auto">
             <thead class="max-[992px]:hidden bg-primary text-white rounded-lg text-xs text-pretty uppercase">
