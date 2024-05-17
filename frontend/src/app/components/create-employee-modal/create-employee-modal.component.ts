@@ -191,7 +191,7 @@ export class CreateEmployeeModalComponent extends ModalBase implements OnInit, A
 
     this.isSubmitting = true;
 
-
+    // updating employee
 
     this.employeeService.updateEmployee(this.employee!.id, form)
       .subscribe({
