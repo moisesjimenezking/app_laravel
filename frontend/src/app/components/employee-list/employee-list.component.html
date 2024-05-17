@@ -1,0 +1,76 @@
+<section class="employee-section">
+    <div class="flex flex-row items-center justify-between">
+        <h3 class="text-2xl text-pretty">Lista de empleados</h3>
+        <app-button class="w-[240px]" (click)="onRegisterEmployee()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z" />
+            </svg>
+            <span>Registrar empleado</span>
+        </app-button>
+    </div>
+    <div class="relative overflow-x-auto sm:rounded-lg my-3">
+        <table class="w-full text-sm text-left rtl:text-right table-auto">
+            <thead class="max-[992px]:hidden bg-primary text-white rounded-lg text-xs text-pretty uppercase">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Nombre completo
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Identificación
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Correo electrónico
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        País del empleo
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Fecha de ingreso
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Area
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <app-employee [data]="{
+                                                firstName: 'Eliezer',
+                                                otherName: 'Jahday',
+                                                surname: 'Capuano',
+                                                secondSurname: '',
+                                                email: 'jeliezercapuanolopez@gmail.com',
+                                                country: 'Venezuela',
+                                                state: 'Carabobo',
+                                                admissionDate: '16/05/2024 07:15 AM',
+                                                identificationType: 'V',
+                                                identificationNumber: '26696540',
+                                                area: 'Tecnología',
+                                                id: 1,
+                                                created_at: '',
+                                                updated_at: '',
+                                            }" />
+
+                <app-employee [data]="{
+                                                firstName: 'Eliezer',
+                                                otherName: 'Jahday',
+                                                surname: 'Capuano',
+                                                secondSurname: '',
+                                                email: 'jeliezercapuanolopez@gmail.com',
+                                                country: 'Venezuela',
+                                                state: 'Carabobo',
+                                                admissionDate: '16/05/2024 07:15 AM',
+                                                identificationType: 'V',
+                                                identificationNumber: '26696540',
+                                                area: 'Tecnología',
+                                                id: 1,
+                                                created_at: '',
+                                                updated_at: '',
+                                            }" />
+            </tbody>
+        </table>
+    </div>
+
+</section>

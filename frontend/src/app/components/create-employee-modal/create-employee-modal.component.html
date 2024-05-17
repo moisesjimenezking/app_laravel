@@ -1,0 +1,13 @@
+<section class="w-full max-w-[640px] px-4 py-5 rounded-xl bg-medium">
+    <h3 class="text-3xl font-medium mb-4">Registrar empleado</h3>
+
+    <form [formGroup]="form">
+        <app-form-container>
+            <app-custom-input controlKey="firtsname" placeholder="Primer nombre" />
+            <app-custom-input controlKey="othername" placeholder="Otro nombre" />
+            <app-custom-input controlKey="surname" placeholder="Primer Apellido" />
+            <app-custom-input controlKey="secondSurname" placeholder="Segundo nombre" />
+            <app-email-input />
+        </app-form-container>
+    </form>
+</section>
