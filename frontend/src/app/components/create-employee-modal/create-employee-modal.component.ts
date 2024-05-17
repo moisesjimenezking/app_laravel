@@ -110,7 +110,7 @@ export class CreateEmployeeModalComponent extends ModalBase implements OnInit {
       .subscribe({
         next: (response) => {
           this.isSubmitting = false;
-          this.modalRef.dismiss('cancel');
+          this.modalRef.dismiss('success');
           this.form.reset('');
 
           this.alertService.present({

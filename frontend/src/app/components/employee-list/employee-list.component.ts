@@ -4,8 +4,9 @@ import { Component, OnInit, inject } from '@angular/core';
 import { EmployeeComponent } from '@/components/employee/employee.component';
 import { ButtonComponent } from '@/components/button/button.component';
 import { EmployeeService } from '@/services/employee.service';
-import { ModalService } from '@/lib';
+import { AlertService, ModalService } from '@/lib';
 import { CreateEmployeeModalComponent } from '../create-employee-modal/create-employee-modal.component';
+import { httpErrorMessageDefault } from '@/global/http.const';
 
 @Component({
   selector: 'app-employee-list',
@@ -25,6 +26,7 @@ export class EmployeeListComponent implements OnInit {
 
   private readonly employeeService = inject(EmployeeService);
   private readonly modalService = inject(ModalService);
+  private readonly alertService = inject(AlertService);
 
   ngOnInit(): void {
     this.getEmployees();
@@ -48,8 +50,41 @@ export class EmployeeListComponent implements OnInit {
 
 
   async onRegisterEmployee() {
-    await this.modalService.open({
+    const { reason, data } = await this.modalService.open({
       component: CreateEmployeeModalComponent,
-    })
+    });
+
+    console.log("reason", reason, data);
+
+    if (reason == 'success') {
+      this.getEmployees();
+    }
+
+  }
+
+  onDeleteEmployee(id: number) {
+
+    this.employeeService.deleteEmployee(id)
+      .subscribe({
+        next: (response) => {
+          this.alertService.present({
+            title: 'Exito',
+            body: 'El empleado ha sido eliminado exitosamente',
+            showCancelButton: false,
+            textConfirmButton: 'Cerrar'
+          });
+
+          this.getEmployees();
+
+        },
+        error: (error) => {
+          this.alertService.present({
+            title: 'Error',
+            body: httpErrorMessageDefault,
+            showCancelButton: false,
+            textConfirmButton: 'Aceptar'
+          });
+        }
+      })
   }
 }

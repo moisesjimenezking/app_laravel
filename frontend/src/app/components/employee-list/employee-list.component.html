@@ -44,7 +44,7 @@
             @if(!isLoading && employees.length > 0){
             <tbody>
                 @for (employee of employees; track employee.id) {
-                <app-employee [data]="employee" />
+                <app-employee [data]="employee" (delete)="onDeleteEmployee($event)" />
                 }
             </tbody>
 

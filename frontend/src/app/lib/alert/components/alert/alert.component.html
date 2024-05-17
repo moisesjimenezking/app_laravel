@@ -20,7 +20,8 @@
                 @if(_getShowValueCancelButton()){
                 <button class="capitalize border-[2px] border-primary rounded-[14px] min-h-[48px] w-full"
                     (click)="dismiss(alertRole.cancelled)">
-                    <span class="text-medium font-medium text-lg">{{ _getTextCancelButton() }}</span>
+                    <span class="font-medium text-lg text-[var(--color-dark)]">{{ _getTextCancelButton()
+                        }}</span>
                 </button>
                 }
             </div>

@@ -84,7 +84,7 @@ export class ModalService {
                     // pl.onDone(() => {
 
                     this.closeModal(this.modalComponent!)
-                    // resolve({ reason, data });
+                    resolve({ reason, data });
                     // })
                 }
             }

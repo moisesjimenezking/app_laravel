@@ -30,4 +30,12 @@ export class EmployeeService {
       `${HttpProvider.apiUri}register`
       , params);
   }
+
+
+  deleteEmployee(id: number): Observable<any> {
+
+    return this._httpClient.delete<any>(
+      `${HttpProvider.apiUri}users`
+      , { body: { id } });
+  }
 }
