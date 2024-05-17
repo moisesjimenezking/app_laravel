@@ -35,41 +35,28 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                <app-employee [data]="{
-                                                firstName: 'Eliezer',
-                                                otherName: 'Jahday',
-                                                surname: 'Capuano',
-                                                secondSurname: '',
-                                                email: 'jeliezercapuanolopez@gmail.com',
-                                                country: 'Venezuela',
-                                                state: 'Carabobo',
-                                                admissionDate: '16/05/2024 07:15 AM',
-                                                identificationType: 'V',
-                                                identificationNumber: '26696540',
-                                                area: 'Tecnología',
-                                                id: 1,
-                                                created_at: '',
-                                                updated_at: '',
-                                            }" />
 
-                <app-employee [data]="{
-                                                firstName: 'Eliezer',
-                                                otherName: 'Jahday',
-                                                surname: 'Capuano',
-                                                secondSurname: '',
-                                                email: 'jeliezercapuanolopez@gmail.com',
-                                                country: 'Venezuela',
-                                                state: 'Carabobo',
-                                                admissionDate: '16/05/2024 07:15 AM',
-                                                identificationType: 'V',
-                                                identificationNumber: '26696540',
-                                                area: 'Tecnología',
-                                                id: 1,
-                                                created_at: '',
-                                                updated_at: '',
-                                            }" />
+            @if(isLoading) {
+            <div class="w-full flex items-center mt-2">
+                <span class="text-sm font-medium text-pretty text-center">Cargando empleados...</span>
+            </div>
+            }
+            @if(!isLoading && employees.length > 0){
+            <tbody>
+                @for (employee of employees; track employee.id) {
+                <app-employee [data]="employee" />
+                }
             </tbody>
+
+            }
+
+
+            @if(!isLoading && employees.length == 0){
+            <div class="w-full flex items-center mt-2">
+                <span class="text-sm font-medium text-pretty text-center">No se encontraron empleados</span>
+            </div>
+            }
+
         </table>
     </div>
 

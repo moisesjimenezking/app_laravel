@@ -15,9 +15,9 @@ export class EmployeeService {
   ) { }
 
 
-  getEmployees(params?: any): Observable<APIResponseModel<EmployeeModel>> {
+  getEmployees(params?: any): Observable<APIResponseModel<EmployeeModel[]>> {
 
-    return this._httpClient.get<APIResponseModel<EmployeeModel>>(
+    return this._httpClient.get<APIResponseModel<EmployeeModel[]>>(
       `${HttpProvider.apiUri}`
       , {
         params

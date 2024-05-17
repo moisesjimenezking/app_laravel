@@ -1,3 +1,4 @@
+import { EmployeeModel } from '@/models/employee.model';
 import { Component, OnInit, inject } from '@angular/core';
 
 import { EmployeeComponent } from '@/components/employee/employee.component';
@@ -18,18 +19,29 @@ import { CreateEmployeeModalComponent } from '../create-employee-modal/create-em
 })
 export class EmployeeListComponent implements OnInit {
 
+  employees: EmployeeModel[] = [];
+
+  isLoading = false;
 
   private readonly employeeService = inject(EmployeeService);
   private readonly modalService = inject(ModalService);
 
   ngOnInit(): void {
+    this.getEmployees();
+  }
+
+
+  getEmployees() {
+    this.isLoading = true;
+
     this.employeeService.getEmployees()
       .subscribe({
         next: (response) => {
-          console.log("Response employee ", response);
+          this.employees = response.data;
+          this.isLoading = false;
         },
         error: (error) => {
-          console.log("Error employee ", error);
+          this.isLoading = false;
         }
       })
   }
