@@ -6,6 +6,7 @@ import { FormContainerComponent } from "@/components/form/form-container/form-co
 import { EmailInputComponent } from "@/components/form/input/customs/email-input.component";
 import { CustomInputComponent } from "@/components/form/input/customs/custom-input.component";
 import { ModalBase, ModalRef } from '@/lib/modal/modal';
+import { ButtonComponent } from "@/components/button/button.component";
 
 @Component({
   selector: 'app-create-employee-modal',
@@ -16,7 +17,8 @@ import { ModalBase, ModalRef } from '@/lib/modal/modal';
     ReactiveFormsModule,
     FormContainerComponent,
     EmailInputComponent,
-    CustomInputComponent
+    CustomInputComponent,
+    ButtonComponent
   ]
 })
 export class CreateEmployeeModalComponent extends ModalBase {
