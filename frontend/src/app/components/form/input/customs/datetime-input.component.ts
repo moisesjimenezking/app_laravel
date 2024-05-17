@@ -16,23 +16,19 @@ import { IconComponent } from "@/components/icon.component";
     <div class="flex w-full">
     <ng-content select="[slot=start]"/>
      <app-input
-     type="datetime-local"
+     type="date"
      [min]="min"
      [max]="maxDate"
-     [formControl]="control" [placeholder]="placeholder">
-        <!-- <app-icon [icon]="icon" class="text-color" color="" size="20px" strokeWidth="2rem" /> -->
-
+     [formControl]="control" [placeholder]="placeholder"
+     >
+ 
         @if(validateWithProp('required')) {
             <app-input-error-message>
                 {{requiredErrorMessage}}
             </app-input-error-message>
         }
 
-          @if(validateWithProp('pattern')) {
-            <app-input-error-message>
-                <!-- {{patternMessage}} -->
-            </app-input-error-message>
-        }
+          
      </app-input>
 
      </div>

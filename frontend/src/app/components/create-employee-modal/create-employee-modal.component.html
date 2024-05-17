@@ -21,7 +21,7 @@
                     empleo</label>
                 <select id="small"
                     class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary"
-                    (change)="onSelectCountry($event)">
+                    [value]="country" (change)="onSelectCountry($event)">
                     <option selected>Selecciona un país de empleo</option>
                     <option value="Estados Unidos">Estados Unidos</option>
                     <option value="Colombia">Colombia</option>
@@ -34,7 +34,7 @@
                 </label>
                 <select id="small"
                     class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary"
-                    (change)="onSelectDniType($event)">
+                    [value]="dniType" (change)="onSelectDniType($event)">
                     <option selected>Selecciona un tipo de identificación</option>
                     <option value="CC">Cédula de ciudadanía</option>
                     <option value="CE">Cédula de Extranjería</option>
@@ -54,7 +54,7 @@
                 </label>
                 <select id="small"
                     class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary"
-                    (change)="onSelectArea($event)">
+                    [value]="area" (change)="onSelectArea($event)">
                     <option selected>Selecciona el area</option>
                     <option value="Administración">Administración</option>
                     <option value="Financiera">Financiera</option>
@@ -82,10 +82,14 @@
                 (click)="onCancel()">
                 <span>Cancelar</span>
             </app-button>
-            <app-button color="primary" [loading]="isSubmitting" (click)="onRegisterEmployee()"
+            <app-button color="primary" [loading]="isSubmitting" (click)="onHandleAction()"
                 class="min-w-[180px] w-[200px]">
-                <span>Registrar</span>
-                <span text-loading>Registrando...</span>
+                <span>{{
+                    isEditting ? 'Enviar': 'Registrar'
+                    }}</span>
+                <span text-loading>{{
+                    isEditting ? 'Enviando...': 'Registrando...'
+                    }}</span>
             </app-button>
         </div>
     </form>

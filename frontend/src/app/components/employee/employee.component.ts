@@ -16,6 +16,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject
 export class EmployeeComponent {
   @Input({ required: true }) data!: EmployeeModel;
 
+  @Output() edit = new EventEmitter<EmployeeModel>();
   @Output() delete = new EventEmitter<number>();
 
   readonly screenWidth = window.screen.availWidth;
@@ -42,5 +43,9 @@ export class EmployeeComponent {
 
     this.delete.emit(this.data.id);
 
+  }
+
+  onEdit() {
+    this.edit.emit(this.data);
   }
 }

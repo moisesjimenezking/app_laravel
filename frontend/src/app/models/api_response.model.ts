@@ -23,7 +23,7 @@ export interface APIResponseLinkModel {
 }
 
 
-export interface APIResponceCreatedEmployee {
+export interface APIResponceMutateEmployee {
     message: string;
     user: EmployeeModel;
 }

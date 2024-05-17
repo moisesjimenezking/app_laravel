@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -12,6 +12,7 @@ import { DatetimeInputComponent } from "../form/input/customs/datetime-input.com
 import { EmployeeService } from '@/services/employee.service';
 import { AlertService } from '@/lib';
 import { httpErrorMessageDefault } from '@/global/http.const';
+import { CreateEmployeeMutationModel, EmployeeModel, UpdateEmployeeMutationModel } from '@/models/employee.model';
 
 @Component({
   selector: 'app-create-employee-modal',
@@ -26,9 +27,12 @@ import { httpErrorMessageDefault } from '@/global/http.const';
     DatetimeInputComponent
   ]
 })
-export class CreateEmployeeModalComponent extends ModalBase implements OnInit {
+export class CreateEmployeeModalComponent extends ModalBase implements OnInit, AfterViewInit {
 
   @Input() override modalRef!: ModalRef;
+
+  @Input() employee?: EmployeeModel;
+  @Input() isEditting = false;
 
 
   // formulario
@@ -54,6 +58,26 @@ export class CreateEmployeeModalComponent extends ModalBase implements OnInit {
   ngOnInit(): void {
     const d = new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString().split('.')[0].split(':');
     this.minDate = `${d[0]}:${d[1]}`;
+
+  }
+
+  ngAfterViewInit(): void {
+
+    if (this.isEditting) {
+
+      const { firstName, otherName, surname, secondSurname, dni, datetime } = this.form.controls;
+
+      firstName.setValue(this.employee!.firstName);
+      surname.setValue(this.employee!.surname);
+      secondSurname.setValue(this.employee!.secondSurname);
+      dni.setValue(this.employee!.identificationNumber);
+      datetime.setValue(this.employee!.admissionDate);
+      otherName.setValue(this.employee!.otherName);
+      this.country = this.employee!.country;
+      this.dniType = this.employee!.identificationType;
+      this.area = this.employee!.area;
+
+    }
   }
 
   onSelectDniType(ev: any) {
@@ -72,21 +96,30 @@ export class CreateEmployeeModalComponent extends ModalBase implements OnInit {
     this.modalRef.dismiss('cancel');
   }
 
-  onRegisterEmployee() {
+  onHandleAction() {
     this.form.markAllAsTouched();
 
     if (this.form.invalid || this.dniType == '' || this.country == '' || this.area == '') {
-
       return;
     }
 
+    if (!this.isEditting) {
+      this.onRegisterEmployee();
+      return;
+    }
+
+    this.onEditEmployee();
+
+  }
+
+  onRegisterEmployee() {
+
     const { firstName, otherName, surname, secondSurname, dni, datetime } = this.form.value;
 
-    const date = datetime.split('T')[0];;
-    // const time = datetime.split('T')[1].split(':');
+    // const date = datetime.split('T')[0];
+    const date = datetime.split('/').reverse().join('-');
 
-
-    const form: any = {
+    const form: CreateEmployeeMutationModel = {
       firstName,
       surname,
       secondSurname,
@@ -132,4 +165,59 @@ export class CreateEmployeeModalComponent extends ModalBase implements OnInit {
       })
 
   }
+
+  onEditEmployee() {
+    const { firstName, otherName, surname, secondSurname, dni, datetime } = this.form.value;
+
+    // const date = datetime.split('T')[0];
+    const date = datetime.split('/').reverse().join('-');
+    console.log(date);
+
+    const form: Omit<UpdateEmployeeMutationModel, 'id'> = {
+      firstName,
+      surname,
+      secondSurname,
+      identificationType: this.dniType,
+      identificationNumber: dni,
+      admissionDate: date,
+      country: this.country,
+      area: this.area
+
+    };
+
+    if (otherName) {
+      form['otherName'] = otherName;
+    }
+
+    this.isSubmitting = true;
+
+
+
+    this.employeeService.updateEmployee(this.employee!.id, form)
+      .subscribe({
+        next: (response) => {
+          this.isSubmitting = false;
+          this.modalRef.dismiss('success');
+          this.form.reset('');
+
+          this.alertService.present({
+            title: 'Edición de empleado',
+            body: `El empleado ${response.user.firstName} ${response.user.surname} ha sido editado exitosamente.`,
+            showCancelButton: false,
+            textConfirmButton: 'Aceptar'
+          });
+        },
+        error: (error) => {
+          this.alertService.present({
+            title: 'Error',
+            body: httpErrorMessageDefault,
+            showCancelButton: false,
+            textConfirmButton: 'Aceptar'
+          });
+          this.isSubmitting = false;
+        }
+      })
+
+  }
+
 }

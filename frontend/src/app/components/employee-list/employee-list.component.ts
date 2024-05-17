@@ -54,16 +54,27 @@ export class EmployeeListComponent implements OnInit {
       component: CreateEmployeeModalComponent,
     });
 
-    console.log("reason", reason, data);
-
     if (reason == 'success') {
       this.getEmployees();
     }
 
   }
 
-  onDeleteEmployee(id: number) {
+  async onEditEmployee(employee: EmployeeModel) {
+    const { reason } = await this.modalService.open({
+      component: CreateEmployeeModalComponent,
+      componentProps: {
+        isEditting: true,
+        employee
+      }
+    });
 
+    if (reason == 'success') {
+      this.getEmployees();
+    }
+  }
+
+  onDeleteEmployee(id: number) {
     this.employeeService.deleteEmployee(id)
       .subscribe({
         next: (response) => {
