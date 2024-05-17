@@ -1,28 +1,36 @@
-import { EmployeeModel } from '@/models/employee.model';
 import { Component, OnInit, inject } from '@angular/core';
+import { httpErrorMessageDefault } from '@/global/http.const';
 
+import { AlertService, ModalService } from '@/lib';
+
+import { EmployeeModel, EmployeeMutationModel } from '@/models/employee.model';
 import { EmployeeComponent } from '@/components/employee/employee.component';
 import { ButtonComponent } from '@/components/button/button.component';
 import { EmployeeService } from '@/services/employee.service';
-import { AlertService, ModalService } from '@/lib';
-import { CreateEmployeeModalComponent } from '../create-employee-modal/create-employee-modal.component';
-import { httpErrorMessageDefault } from '@/global/http.const';
+import { CreateEmployeeModalComponent } from '@/components/create-employee-modal/create-employee-modal.component';
+import { PaginationComponent } from "@/components/pagination/pagination.component";
+import { FiltersComponent } from "@/components/filters/filters.component";
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
+  templateUrl: './employee-list.component.html',
+  styleUrl: './employee-list.component.scss',
   imports: [
     ButtonComponent,
-    EmployeeComponent
-  ],
-  templateUrl: './employee-list.component.html',
-  styleUrl: './employee-list.component.scss'
+    EmployeeComponent,
+    PaginationComponent,
+    FiltersComponent
+  ]
 })
 export class EmployeeListComponent implements OnInit {
 
   employees: EmployeeModel[] = [];
 
   isLoading = false;
+
+  page = 1;
+  limit = 10;
 
   private readonly employeeService = inject(EmployeeService);
   private readonly modalService = inject(ModalService);
@@ -33,13 +41,18 @@ export class EmployeeListComponent implements OnInit {
   }
 
 
-  getEmployees() {
+  getEmployees(query: Partial<EmployeeMutationModel> = {}) {
     this.isLoading = true;
 
-    this.employeeService.getEmployees()
+    this.employeeService.getEmployees({
+      page: this.page,
+      limit: this.limit,
+      ...query
+    })
       .subscribe({
         next: (response) => {
           this.employees = response.data;
+          console.log(response);
           this.isLoading = false;
         },
         error: (error) => {
@@ -48,6 +61,18 @@ export class EmployeeListComponent implements OnInit {
       })
   }
 
+  onSearchEmployee(query: Partial<EmployeeMutationModel> | null) {
+    if (query == null) {
+      this.getEmployees();
+      return;
+    }
+    if (Object.getOwnPropertyNames(query).length == 0) {
+      this.getEmployees();
+      return;
+    }
+
+    this.getEmployees(query);
+  }
 
   async onRegisterEmployee() {
     const { reason, data } = await this.modalService.open({

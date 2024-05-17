@@ -1,5 +1,5 @@
 import { HttpProvider } from '@/global/http.const';
-import { APIResponceMutateEmployee, APIResponseModel } from '@/models/api_response.model';
+import { APIQueryEmployee, APIResponceMutateEmployee, APIResponseModel } from '@/models/api_response.model';
 import { CreateEmployeeMutationModel, EmployeeModel, UpdateEmployeeMutationModel } from '@/models/employee.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,12 +15,12 @@ export class EmployeeService {
   ) { }
 
 
-  getEmployees(params?: any): Observable<APIResponseModel<EmployeeModel[]>> {
+  getEmployees(q: APIQueryEmployee = { page: 1 }): Observable<APIResponseModel<EmployeeModel[]>> {
 
     return this._httpClient.get<APIResponseModel<EmployeeModel[]>>(
       `${HttpProvider.apiUri}`
       , {
-        params
+        params: { ...q } as Record<string, boolean | number | string>
       });
   }
 
