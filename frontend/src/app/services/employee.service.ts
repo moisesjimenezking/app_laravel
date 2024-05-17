@@ -1,5 +1,5 @@
 import { HttpProvider } from '@/global/http.const';
-import { APIResponseModel } from '@/models/api_response.model';
+import { APIResponceCreatedEmployee, APIResponseModel } from '@/models/api_response.model';
 import { EmployeeModel } from '@/models/employee.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -22,5 +22,12 @@ export class EmployeeService {
       , {
         params
       });
+  }
+
+  createEmployee(params: any): Observable<APIResponceCreatedEmployee> {
+
+    return this._httpClient.post<APIResponceCreatedEmployee>(
+      `${HttpProvider.apiUri}register`
+      , params);
   }
 }

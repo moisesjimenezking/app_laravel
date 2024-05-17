@@ -11,15 +11,14 @@
             </span>
 
             <div class="w-full flex flex-row gap-x-2 items-center justify-center">
-                <button class="capitalize bg-primary rounded-[var(--border-radius-medium)] min-h-[48px] w-full"
+                <button class="capitalize bg-primary rounded-[14px] min-h-[48px] w-full"
                     (click)="dismiss(alertRole.confirmed)">
                     <span class="text-white font-medium text-lg">
                         {{ _getTextConfirmButton() }}
                     </span>
                 </button>
                 @if(_getShowValueCancelButton()){
-                <button
-                    class="capitalize border-[2px] border-primary rounded-[var(--border-radius-medium)] min-h-[48px] w-full"
+                <button class="capitalize border-[2px] border-primary rounded-[14px] min-h-[48px] w-full"
                     (click)="dismiss(alertRole.cancelled)">
                     <span class="text-medium font-medium text-lg">{{ _getTextCancelButton() }}</span>
                 </button>

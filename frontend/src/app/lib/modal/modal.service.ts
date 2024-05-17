@@ -77,15 +77,15 @@ export class ModalService {
                 dismiss: (reason: string, data?: any) => {
                     const el = this.modalComponent!.location.nativeElement
                         .querySelector('.modal__container')
-                    const pl = this._fadeAnimation.fadeAnimationLeave(el);
+                    // const pl = this._fadeAnimation.fadeAnimationLeave(el);
 
-                    pl.play();
+                    // pl.play();
 
-                    pl.onDone(() => {
+                    // pl.onDone(() => {
 
-                        this.closeModal(this.modalComponent!)
-                        resolve({ reason, data });
-                    })
+                    this.closeModal(this.modalComponent!)
+                    // resolve({ reason, data });
+                    // })
                 }
             }
 

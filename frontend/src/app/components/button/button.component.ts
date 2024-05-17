@@ -21,7 +21,7 @@ export class ButtonComponent {
 
 
   getButtonClass() {
-    return `app-button ${this.size} bg-${this.color} text-${this.textColor} shadow-lg ${this.class}`;
+    return `app-button text-${this.textColor} bg-${this.color} ${this.class}`;
   }
 
 }

@@ -17,13 +17,14 @@ import { IconComponent } from "@/components/icon.component";
     <ng-content select="[slot=start]"/>
      <app-input
      type="datetime-local"
-     min="2024-04-17"
+     [min]="min"
+     [max]="maxDate"
      [formControl]="control" [placeholder]="placeholder">
         <!-- <app-icon [icon]="icon" class="text-color" color="" size="20px" strokeWidth="2rem" /> -->
 
         @if(validateWithProp('required')) {
             <app-input-error-message>
-                <!-- {{requiredMessage}} -->
+                {{requiredErrorMessage}}
             </app-input-error-message>
         }
 
@@ -32,8 +33,8 @@ import { IconComponent } from "@/components/icon.component";
                 <!-- {{patternMessage}} -->
             </app-input-error-message>
         }
-
      </app-input>
+
      </div>
     `,
     standalone: true,
@@ -52,15 +53,18 @@ import { IconComponent } from "@/components/icon.component";
 })
 export class DatetimeInputComponent extends BaseCustomComponent implements OnInit, OnDestroy {
     @Input({ required: true, alias: 'controlKey', }) _key!: string;
+    @Input() min: string = '';
     @Input({ required: true }) placeholder!: string;
+    @Input() requiredErrorMessage = '';
 
-    override  control = new FormControl('', [Validators.required])
+    override  control = new FormControl('', [Validators.required]);
+
+    maxDate = '';
 
     ngOnInit(): void {
+        const d = new Date().toISOString().split('.')[0].split(':');
+        this.maxDate = `${d[0]}:${d[1]}`;
         this.controlOf?.addControl(this._key, this.control);
-
-
-
     }
 
     ngOnDestroy(): void {

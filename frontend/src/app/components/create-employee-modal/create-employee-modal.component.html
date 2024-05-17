@@ -7,11 +7,11 @@
                 patternMessage="El campo no es válido" requiredMessage="El primer apellido es requerido" />
             <app-custom-input controlKey="secondSurname" placeholder="Segundo apellido" [pattern]="namePattern"
                 patternMessage="El campo no es válido" requiredMessage="El segundo apellido es requerido" />
-            <app-custom-input controlKey="firtsname" placeholder="Primer nombre" [pattern]="namePattern"
+            <app-custom-input controlKey="firstName" placeholder="Primer nombre" [pattern]="namePattern"
                 patternMessage="El campo no es válido" requiredMessage="El primer nombre es requerido" />
             <div class="w-full">
-                <span class="text-left text-sm font-medium block mb-2">Campo Opcional</span>
-                <app-custom-input controlKey="othername" placeholder="Otro nombre" [required]="false"
+                <span class="text-left text-sm font-medium block mb-2">Campo opcional</span>
+                <app-custom-input controlKey="otherName" placeholder="Otro nombre" [required]="false"
                     [pattern]="namePatternExtend" patternMessage="El campo no es válido" />
             </div>
 
@@ -20,10 +20,11 @@
                 <label for="small" class="block mb-2 text-sm font-medium text-dark">País de
                     empleo</label>
                 <select id="small"
-                    class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary">
+                    class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary"
+                    (change)="onSelectCountry($event)">
                     <option selected>Selecciona un país de empleo</option>
-                    <option value="US">Estados unidos</option>
-                    <option value="CO">Colombia</option>
+                    <option value="Estados Unidos">Estados Unidos</option>
+                    <option value="Colombia">Colombia</option>
                 </select>
             </div>
             <!-- IDENTIFICATION TYPE -->
@@ -32,7 +33,8 @@
                     Tipo de identificación
                 </label>
                 <select id="small"
-                    class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary">
+                    class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary"
+                    (change)="onSelectDniType($event)">
                     <option selected>Selecciona un tipo de identificación</option>
                     <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
                     <option value="Cédula de Extranjería">Cédula de Extranjería</option>
@@ -41,22 +43,49 @@
                 </select>
             </div>
 
+
             <app-custom-input controlKey="dni" placeholder="Número de identificación" [pattern]="dniPattern"
                 requiredMessage="El número de identificación es requerido." patternMessage="El campo no es válido" />
 
-            <div class="relative max-w-sm">
-                <input datepicker datepicker-format="mm/dd/yyyy" type="text"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Select date">
+            <!-- AREA -->
+            <div class="flex flex-col w-full">
+                <label for="small" class="block mb-2 text-sm font-medium text-dark">
+                    Area
+                </label>
+                <select id="small"
+                    class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary"
+                    (change)="onSelectArea($event)">
+                    <option selected>Selecciona el area</option>
+                    <option value="Administración">Administración</option>
+                    <option value="Financiera">Financiera</option>
+                    <option value="Compras">Compras</option>
+                    <option value="Infraestructura">Infraestructura</option>
+                    <option value="Tecnologia">Tecnologia</option>
+                    <option value="Operación">Operación</option>
+                    <option value="Talento Humano">Talento Humano</option>
+                    <option value="Servicios varios">Servicios varios</option>
+
+                    Administración, Financiera, Compras, Infraestructura, Operación, Talento
+                    Humano, Servicios Varios
+                </select>
             </div>
-            <app-datetime-input controlKey="datetime" placeholder="Tiempo" />
+
+
+            <div class="w-full">
+                <span class="text-left text-sm font-medium block mb-2">Fecha de ingreso</span>
+                <app-datetime-input controlKey="datetime" placeholder="Tiempo" [min]="minDate"
+                    requiredErrorMessage="La fecha de ingreso es requerida" />
+            </div>
         </app-form-container>
         <div class="w-full flex flex-row gap-2 mt-4 mb-2 items-center justify-end">
-            <app-button class="bg-transparent border-primary border-[2px]" color="transparent" textColor="dark">
+            <app-button class="bg-transparent border-primary border-[2px]" color="transparent" textColor="dark"
+                (click)="onCancel()">
                 <span>Cancelar</span>
             </app-button>
-            <app-button color="primary">
+            <app-button color="primary" [loading]="isSubmitting" (click)="onRegisterEmployee()"
+                class="min-w-[180px] w-[200px]">
                 <span>Registrar</span>
+                <span text-loading>Registrando...</span>
             </app-button>
         </div>
     </form>
