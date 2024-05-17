@@ -27,7 +27,7 @@ yarn-error.log
 /frontend/bazel-out
 
 # Node
-/fronted/node_modules
+/frontend/node_modules
 npm-debug.log
 yarn-error.log
 
@@ -50,7 +50,7 @@ yarn-error.log
 
 # Miscellaneous
 /frontend/.angular/cache
-.sass-cache/
+/frontend/.sass-cache/
 /frontend/connect.lock
 /frontend/coverage
 /frontend/libpeerconnection.log
