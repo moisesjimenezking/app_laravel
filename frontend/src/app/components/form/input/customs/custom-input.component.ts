@@ -17,7 +17,7 @@ import { IconComponent } from "@/components/icon.component";
     <ng-content select="[slot=start]"/>
      <app-input
      [formControl]="control" [placeholder]="placeholder">
-        <app-icon [icon]="icon" class="text-color" color="" size="20px" strokeWidth="2rem" />
+        <!-- <app-icon [icon]="icon" class="text-color" color="" size="20px" strokeWidth="2rem" /> -->
 
         @if(validateWithProp('required')) {
             <app-input-error-message>
@@ -55,15 +55,22 @@ export class CustomInputComponent extends BaseCustomComponent implements OnInit,
     @Input() pattern?: RegExp;
     @Input() patternMessage: string = 'El campo es inválido.';
     @Input() icon?: string;
+    @Input() required = true;
 
     override  control = new FormControl('', [Validators.required])
 
     ngOnInit(): void {
         this.controlOf?.addControl(this._key, this.control);
 
+        if (!this.required) {
+            this.control.removeValidators(Validators.required);
+        }
+
         if (this.pattern) {
             this.control.addValidators(Validators.pattern(this.pattern))
         }
+
+
     }
 
     ngOnDestroy(): void {

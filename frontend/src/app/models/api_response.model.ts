@@ -1,3 +1,5 @@
+import { EmployeeModel } from "./employee.model";
+
 export interface APIResponseModel<T> {
     current_page: number;
     data: T;
@@ -5,7 +7,7 @@ export interface APIResponseModel<T> {
     from: number;
     last_page: number;
     last_page_url: string;
-    links: ApiResponseLinkModel[];
+    links: APIResponseLinkModel[];
     next_page_url: null;
     path: string;
     per_page: number;
@@ -14,8 +16,14 @@ export interface APIResponseModel<T> {
     total: number;
 }
 
-export interface ApiResponseLinkModel {
+export interface APIResponseLinkModel {
     url: null | string;
     label: string;
     active: boolean;
+}
+
+
+export interface APIResponceMutateEmployee {
+    message: string;
+    user: EmployeeModel;
 }

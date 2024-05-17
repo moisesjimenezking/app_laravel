@@ -4,6 +4,7 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 module.exports = {
   content: [
     "./src/**/*.{html,ts}",
+    "./src/app/components/**/*.{html, ts}"
   ],
   theme: {
     extend: {
