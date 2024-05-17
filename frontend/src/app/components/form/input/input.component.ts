@@ -34,6 +34,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     @Input('class') cssClass = '';
     @Input('errormessageclass') errorMessageClass = '';
     @Input() style: any;
+    @Input() min: string = '';
+    @Input() max: string = '';
 
     private touchedCb!: () => void;
     private changeCb!: (...args: any[]) => void;

@@ -1,12 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 import { CustomFormGroup } from '@/components/form/input/customs/base';
 import { FormContainerComponent } from "@/components/form/form-container/form-container.component";
-import { EmailInputComponent } from "@/components/form/input/customs/email-input.component";
 import { CustomInputComponent } from "@/components/form/input/customs/custom-input.component";
 import { ModalBase, ModalRef } from '@/lib/modal/modal';
 import { ButtonComponent } from "@/components/button/button.component";
+import { PATTERNS } from '@/global/patterns.const';
+import { DatetimeInputComponent } from "../form/input/customs/datetime-input.component";
 
 @Component({
   selector: 'app-create-employee-modal',
@@ -16,9 +18,9 @@ import { ButtonComponent } from "@/components/button/button.component";
   imports: [
     ReactiveFormsModule,
     FormContainerComponent,
-    EmailInputComponent,
     CustomInputComponent,
-    ButtonComponent
+    ButtonComponent,
+    DatetimeInputComponent
   ]
 })
 export class CreateEmployeeModalComponent extends ModalBase {
@@ -27,4 +29,11 @@ export class CreateEmployeeModalComponent extends ModalBase {
 
   // formulario
   form = new CustomFormGroup({});
+
+
+  // patterns
+  namePattern = PATTERNS.NAME;
+  namePatternExtend = PATTERNS.NAME_EXTEND;
+  dniPattern = PATTERNS.DNI;
+
 }

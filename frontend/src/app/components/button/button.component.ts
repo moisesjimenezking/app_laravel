@@ -1,6 +1,8 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
+type BColor = 'primary' | 'secondary' | 'tertiary' | 'medium' | 'dark' | 'white' | 'transparent';
+
 @Component({
   selector: 'app-button',
   standalone: true,
@@ -11,8 +13,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() class = '';
-  @Input() color: 'primary' | 'secondary' | 'tertiary' | 'medium' | 'white' = 'secondary';
-  @Input() textColor: 'primary' | 'secondary' | 'tertiary' | 'medium' | 'white' = 'white';
+  @Input() color: BColor = 'secondary';
+  @Input() textColor: BColor = 'white';
   @Input() size: 'lg' | 'md' | 'sm' = 'lg';
 
   @Input() loading = false;

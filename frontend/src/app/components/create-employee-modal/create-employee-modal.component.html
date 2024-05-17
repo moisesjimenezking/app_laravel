@@ -3,14 +3,56 @@
 
     <form [formGroup]="form">
         <app-form-container>
-            <app-custom-input controlKey="firtsname" placeholder="Primer nombre" />
-            <app-custom-input controlKey="othername" placeholder="Otro nombre" />
-            <app-custom-input controlKey="surname" placeholder="Primer Apellido" />
-            <app-custom-input controlKey="secondSurname" placeholder="Segundo nombre" />
-            <app-email-input />
+            <app-custom-input controlKey="surname" placeholder="Primer apellido" [pattern]="namePattern"
+                patternMessage="El campo no es válido" requiredMessage="El primer apellido es requerido" />
+            <app-custom-input controlKey="secondSurname" placeholder="Segundo apellido" [pattern]="namePattern"
+                patternMessage="El campo no es válido" requiredMessage="El segundo apellido es requerido" />
+            <app-custom-input controlKey="firtsname" placeholder="Primer nombre" [pattern]="namePattern"
+                patternMessage="El campo no es válido" requiredMessage="El primer nombre es requerido" />
+            <div class="w-full">
+                <span class="text-left text-sm font-medium block mb-2">Campo Opcional</span>
+                <app-custom-input controlKey="othername" placeholder="Otro nombre" [required]="false"
+                    [pattern]="namePatternExtend" patternMessage="El campo no es válido" />
+            </div>
+
+            <!-- COUNTRY EMPLOYMENT -->
+            <div class="flex flex-col w-full">
+                <label for="small" class="block mb-2 text-sm font-medium text-dark">País de
+                    empleo</label>
+                <select id="small"
+                    class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary">
+                    <option selected>Selecciona un país de empleo</option>
+                    <option value="US">Estados unidos</option>
+                    <option value="CO">Colombia</option>
+                </select>
+            </div>
+            <!-- IDENTIFICATION TYPE -->
+            <div class="flex flex-col w-full">
+                <label for="small" class="block mb-2 text-sm font-medium text-dark">
+                    Tipo de identificación
+                </label>
+                <select id="small"
+                    class="block w-full p-2 h-[50px] text-[16px] text-dark outline-none border border-tertiary rounded-[14px] bg-tertiary">
+                    <option selected>Selecciona un tipo de identificación</option>
+                    <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
+                    <option value="Cédula de Extranjería">Cédula de Extranjería</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Permiso especial">Permiso especial</option>
+                </select>
+            </div>
+
+            <app-custom-input controlKey="dni" placeholder="Número de identificación" [pattern]="dniPattern"
+                requiredMessage="El número de identificación es requerido." patternMessage="El campo no es válido" />
+
+            <div class="relative max-w-sm">
+                <input datepicker datepicker-format="mm/dd/yyyy" type="text"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Select date">
+            </div>
+            <app-datetime-input controlKey="datetime" placeholder="Tiempo" />
         </app-form-container>
         <div class="w-full flex flex-row gap-2 mt-4 mb-2 items-center justify-end">
-            <app-button class="bg-transparent border-primary border-[2px] text-[var(--color-dark)]">
+            <app-button class="bg-transparent border-primary border-[2px]" color="transparent" textColor="dark">
                 <span>Cancelar</span>
             </app-button>
             <app-button color="primary">
