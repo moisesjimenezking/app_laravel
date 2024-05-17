@@ -1,0 +1,21 @@
+<section class="w-full max-w-[640px] px-4 py-5 rounded-xl bg-medium">
+    <h3 class="text-3xl font-medium mb-4">Registrar empleado</h3>
+
+    <form [formGroup]="form">
+        <app-form-container>
+            <app-custom-input controlKey="firtsname" placeholder="Primer nombre" />
+            <app-custom-input controlKey="othername" placeholder="Otro nombre" />
+            <app-custom-input controlKey="surname" placeholder="Primer Apellido" />
+            <app-custom-input controlKey="secondSurname" placeholder="Segundo nombre" />
+            <app-email-input />
+        </app-form-container>
+        <div class="w-full flex flex-row gap-2 mt-4 mb-2 items-center justify-end">
+            <app-button class="bg-transparent border-primary border-[2px] text-[var(--color-dark)]">
+                <span>Cancelar</span>
+            </app-button>
+            <app-button color="primary">
+                <span>Registrar</span>
+            </app-button>
+        </div>
+    </form>
+</section>
